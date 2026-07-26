@@ -167,9 +167,15 @@
       "channelName": "جديد Towards Eternity"
     },
     {
-      "categoryId": "eh_elmeshkela",
+      "categoryId": "whats_problem",
       "channelId": "UCQ2X_YPmdjBOjVq6dLbO0pQ",
-      "channelName": "جديد قناة إيه المشكلة"
+      "channelName": "جديد ايه المشكلة"
+    },
+    {
+      "categoryId": "AL-HAFEZ",
+      "channelId": "UC6sJr_MqZE9-Ng0BsBE50Jg",
+      "channelName": "جديد AL-HAFEZ"
     }
+    
   ]
 }
