@@ -89,13 +89,15 @@ def run_sync():
 
     total_new_items = 0
 
+    seen_cat_ids = set()
     for ch in channels:
         cat_id = ch.get("categoryId")
         channel_id = ch.get("channelId")
         channel_name = ch.get("channelName", cat_id)
 
-        if not channel_id or not cat_id:
+        if not channel_id or not cat_id or cat_id in seen_cat_ids:
             continue
+        seen_cat_ids.add(cat_id)
 
         try:
             entries = fetch_rss_entries(channel_id)
