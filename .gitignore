@@ -6,3 +6,10 @@ __pycache__/
 scratch/
 data/
 models/
+src/
+web_app.py
+generate_notebook.py
+train_arabic_lora.ipynb
+test_intent.py
+test_output.txt
+radio_database/

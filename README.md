@@ -1,36 +1,32 @@
-# 🤖 نظام المزامنة التلقائية والبحث الإسلامي الذكي (Islamic Content & Auto-Sync Engine)
+# 🤖 بوت المزامنة السحابية لليوتيوب (YouTube 24/7 Auto-Sync Bot)
 
 [![GitHub Actions Status](https://img.shields.io/badge/24%2F7%20Auto%20Sync-Active-22c55e?style=for-the-badge&logo=githubactions)](https://github.com/hozifa460/islamic-content/actions)
 [![Hugging Face Dataset](https://img.shields.io/badge/Hugging%20Face-Telewat__Daawa__And__Channels-ffbf00?style=for-the-badge&logo=huggingface)](https://huggingface.co/datasets/hozifa1/Telewat_Daawa_And_Channels)
 [![Python Version](https://img.shields.io/badge/Python-3.10%2B-3776ab?style=for-the-badge&logo=python)](https://python.org)
 
-نظام متكامل ومُؤتمت 100% لمزامنة الفيديوهات والتلاوات الإسلامية من 33+ قناة يوتيوب موثوقة ونشرها تلقائياً على منصة **Hugging Face** كل 60 دقيقة عبر **GitHub Actions** بدون أي تدخل بشري، مقترن بمحرك بحث معكوس فائق الذكاء ومجرد من العشوائية.
+هذا المستودع مخصص حصرياً لعملية **المزامنة السحابية الآلية 24/7** لجلب التلاوات والمقاطع الإسلامية والدعوية من **33 قناة يوتيوب موثقة** وتصنيفها ونشرها تلقائياً على منصة **Hugging Face** كل 60 دقيقة عبر **GitHub Actions** بدون أي تدخل بشري.
 
 ---
 
-## 🌟 مميزات النظام والحل الذهبي (Golden Features)
+## ⚙️ كيف يعمل النظام السحابي؟ (24/7 Automated Pipeline)
 
-### 1. 🤖 مزامنة آلية سحابية 24/7 (Cloud Auto-Sync)
-- يعمل بجدولة آلية سحابية على **GitHub Actions** تفحص موجزات RSS لـ **33 قناة يوتيوب** كل 60 دقيقة.
-- يقوم بتصنيف المادة تلقائياً إلى ثلاثة أقسام:
-  - 🎥 **فيديوهات طويلة (`videos`)**
-  - ⚡ **مقاطع قصيرة (`shorts`)**
-  - 🔴 **بث مباشر ولقاءات (`live`)**
-- يرفع المحتوى المحدث فورياً لمستودع بيانات هاتفينغ فيس: [`hozifa1/Telewat_Daawa_And_Channels`](https://huggingface.co/datasets/hozifa1/Telewat_Daawa_And_Channels).
-
-### 2. 🔒 سياسة منع التسريب المطلقة (Zero Leak Policy)
-- عند طلب المحتوى الخاطئ بشرط قنوات معينة (مثل الدكتور هيثم طلعت، الشيخ عثمان الخميس، يوسف جو، الشيخ محمد الغليظ، إلخ)، يتم عزل القناة 100% واستبعاد نتائج أي قنوات أخرى.
-
-### 3. ⏱️ الترتيب الزمني الذكي بحسب التاريخ (Recency Order)
-- عند استخدام كلمات استعلامية مثل (`أحدث`, `أخير`, `جديد`), يرتب المحرك النتائج بحسب التاريخ ليُظهر **أحدث المقاطع والفيديوهات المرفوعة أولاً**.
-
-### 4. 📚 التمييز الدقيق بين الكتب والفيديو (Smart Intent Classifier)
-- يتم التمييز الفوري بين طلبات الكتب والأحاديث (مثل "كتاب صحيح البخاري") وطلبات الميديا.
-- طلبات الكتب تُجلب من فهرس الأحاديث والكتب الفقهية (55,454 حاديثاً ونصاً) خلال أقل من 0.05 ثانية وبدون ميديا.
+```text
+  [ 🎥 33 قناة يوتيوب (RSS Feeds) ]
+                │
+                ▼ (كل 60 دقيقة عبر GitHub Actions)
+  [ 🤖 tools/sync_youtube.py ]
+                │
+                ├── 1. جلب أحدث المقاطع والتلاوات المرفوعة
+                ├── 2. تصنيف المادة: (Videos 🎥 / Shorts ⚡ / Live 🔴)
+                └── 3. معالجة وتحديث الفهرس الشامل index.json
+                │
+                ▼ (رفع تلقائي سحابي)
+  [ 🤗 Hugging Face: hozifa1/Telewat_Daawa_And_Channels ]
+```
 
 ---
 
-## 📂 هيكلية المستودع (Repository Architecture)
+## 📂 محتويات المستودع (Repository Structure)
 
 ```text
 islamic-content/
@@ -39,67 +35,37 @@ islamic-content/
 │       └── youtube-sync.yml       # ملف الجدولة السحابية الآلية 24/7 لـ GitHub Actions
 ├── tools/
 │   ├── sync_youtube.py           # المحرك الرئيسي المباشر لجلب RSS وتحديث Hugging Face
-│   └── youtube_channels.json     # قائمة الـ 33 قناة يوتيوب المعرفة وتفريعاتها
-├── radio_database/
-│   └── youtube_channels.json     # نسق التكوين المصدري للقنوات
+│   └── youtube_channels.json     # قائمة الـ 33 قناة يوتيوب المعرفة ومعرفاتها
 ├── requirements.txt              # المكتبيات المطلوبة (huggingface_hub)
 └── README.md                     # الدليل المرجعي والشرح التوضيحي للنظام
 ```
 
 ---
 
-## 📡 القنوات المشمولة بالمزامنة المباشرة (33 Channel Catalog)
+## 🔑 تفعيل المفتاح السري (GitHub Secrets Setup)
 
-يتابع النظام أحدث إصدارات القنوات الإسلامية والدعوية والتلاوات، ومنها:
+لتشغيل السكربت تلقائياً في السحاب بالصلاحية الكاملة للتحديث على Hugging Face:
 
-- 🟢 الدكتور هيثم طلعت
-- 🟢 جديد الشيخ عثمان الخميس
-- 🟢 جديد يوسف جو
-- 🟢 جديد الشيخ محمد الغليظ
-- 🟢 جديد الدكتور إياد القنيبي
-- 🟢 جديد التجويد والشيخ المنشاوي
-- 🟢 جديد الشيخ عبد الباسط عبد الصمد
-- 🟢 جديد الشيخ مصطفى العدوي
-- 🟢 جديد الشيخ أبو إسحاق الحويني
-- 🟢 جديد الدكتور عبد الله رشدي
-- 🟢 جديد الدكتور ذاكر نايك
-- 🟢 جديد الشيخ معاذ عليان
-- 🟢 جديد بودكاست بدون ورق
-- 🟢 جديد محمود داوود
-- 🟢 جديد البحبحاني
-- *(بالإضافة لجميع القنوات الـ 33 الموثقة في `youtube_channels.json`)*
+1. اذهب إلى **Settings** ⬅️ **Secrets and variables** ⬅️ **Actions**.
+2. انقر على **New repository secret**.
+3. الاسم (Name): `HF_TOKEN`
+4. القيمة (Secret): ضَع رمز الوصول الخاص بك في هاجينج فيس (`hf_...`).
 
 ---
 
-## 🔑 كيفية تفعيل التشغيل الآلي على حسابك (Setup Guide)
+## ➕ كيفية إضافة قناة جديدة (Adding New Channels)
 
-1. **قم برفع هذا المستودع إلى حسابك على GitHub**:
-   ```bash
-   git add .
-   git commit -m "feat: add 24/7 automated youtube sync workflow"
-   git push origin main
-   ```
-
-2. **إضافة المفتاح السري (`HF_TOKEN`)**:
-   - افتح مستودعك على موقع GitHub.
-   - اذهب إلى **Settings** ⬅️ **Secrets and variables** ⬅️ **Actions**.
-   - انقر على **New repository secret**.
-   - الاسم (Name): `HF_TOKEN`
-   - القيمة (Secret): ضع رمز وصول Hugging Face الخاص بك (`hf_...`).
-
----
-
-## 🛠️ التشغيل اليدوي والمحلي (Local Execution)
-
-إذا أردت تشغيل المزامنة فورياً من جهازك الشخصي:
-
-```bash
-pip install -r requirements.txt
-python tools/sync_youtube.py
+عدّل ملف `tools/youtube_channels.json` وأضف القناة بالصيغة التالية:
+```json
+{
+  "categoryId": "اسم_معرف_القناة",
+  "channelId": "UCxxxxxxxxxxxxxxxxxxxxxx",
+  "channelName": "اسم القناة بالكامل"
+}
 ```
 
 ---
 
 <div align="center">
-  🔒 <b>نظام موثق • دقيق • مجرد من العشوائية • محدث 24/7 تلقائياً</b>
+  🔒 <b>بوت مزامنة سحابي مُؤتمت 100% • محدث 24/7 تلقائياً</b>
 </div>
