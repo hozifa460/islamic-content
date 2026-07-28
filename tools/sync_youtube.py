@@ -63,12 +63,9 @@ def detect_video_bucket(video_id):
     return "videos"
 
 def load_channels_config():
-    # Priority 1: local tools/youtube_channels.json or radio_database/youtube_channels.json
+    # The tools copy is the single canonical local configuration.
     local_paths = [
-        os.path.join(os.path.dirname(__file__), "youtube_channels.json"),
-        os.path.join(os.path.dirname(__file__), "..", "radio_database", "youtube_channels.json"),
-        "tools/youtube_channels.json",
-        "radio_database/youtube_channels.json"
+        os.path.join(os.path.dirname(__file__), "youtube_channels.json")
     ]
     for p in local_paths:
         if os.path.exists(p):
@@ -84,8 +81,17 @@ def load_channels_config():
 def run_sync():
     log("🚀 Starting Full 24/7 Sync for Hugging Face Dataset...")
 
+    if not HF_TOKEN:
+        raise RuntimeError("HF_TOKEN is required for dataset synchronization.")
+
     channels = load_channels_config()
     log(f"Loaded {len(channels)} configured channels.")
+    channel_ids = [ch.get("channelId") for ch in channels if ch.get("channelId")]
+    category_ids = [ch.get("categoryId") for ch in channels if ch.get("categoryId")]
+    if len(channel_ids) != len(set(channel_ids)):
+        raise ValueError("Duplicate YouTube channelId values found in configuration.")
+    if len(category_ids) != len(set(category_ids)):
+        raise ValueError("Duplicate categoryId values found in configuration.")
 
     total_new_items = 0
 
@@ -107,6 +113,7 @@ def run_sync():
                 item = {
                     "title": e['title'],
                     "subtitle": channel_name,
+                    "publishedAt": e.get("published", ""),
                     "audioUrl": f"https://www.youtube.com/watch?v={e['videoId']}",
                     "imageUrl": f"https://i.ytimg.com/vi/{e['videoId']}/hqdefault.jpg",
                     "videoUrl": f"https://www.youtube.com/watch?v={e['videoId']}"
